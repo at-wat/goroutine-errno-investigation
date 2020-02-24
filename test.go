@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"net"
-	"os"
 	"runtime"
 	"time"
 )
@@ -18,9 +16,7 @@ func main() {
 			_, _ = net.Dial("tcp", "localhost:12345") // dst port is not listened
 		}()
 	}
-	_, err := C.usleep(C.uint(1000000))
-	fmt.Printf("error from CGO: %v\n", err)
-	if err != nil {
-		os.Exit(1)
+	if _, err := C.usleep(C.uint(1000000)); err != nil {
+		panic(err)
 	}
 }
