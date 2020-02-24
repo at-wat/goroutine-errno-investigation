@@ -17,7 +17,7 @@ func main() {
 			// C.setErrno()
 		}()
 	}
-	if _, err := C.usleep(C.uint(1000000)); err != nil {
+	if _, err := C.sleep(C.uint(1)); err != nil {
 		panic(err)
 	}
 }
