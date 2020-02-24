@@ -7,7 +7,14 @@ import (
 
 // #include <unistd.h>
 // #include <errno.h>
+// #include <time.h>
 // void setErrno() { errno = 1; }
+// void wait() {
+//   time_t n, s = time(0);
+//   do {
+//     time(&n);
+//   } while(difftime(n, s) < 1.0);
+// }
 import "C"
 
 func main() {
@@ -17,7 +24,7 @@ func main() {
 			// C.setErrno()
 		}()
 	}
-	if _, err := C.sleep(C.uint(1)); err != nil {
+	if _, err := C.wait(); err != nil {
 		panic(err)
 	}
 }
