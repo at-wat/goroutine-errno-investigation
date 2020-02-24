@@ -12,12 +12,10 @@ import (
 import "C"
 
 func main() {
-	for i := 0; i < runtime.NumCPU()*2; i++ { // run goroutine on all CPUs
+	for i := 0; i < runtime.NumCPU()*2; i++ { // make sure it run goroutine on all CPUs
 		go func() {
-			for {
-				_, _ = net.Dial("tcp", "localhost:12345") // dst port is not listened
-				time.Sleep(time.Millisecond)
-			}
+			time.Sleep(500 * time.Millisecond)
+			_, _ = net.Dial("tcp", "localhost:12345") // dst port is not listened
 		}()
 	}
 	_, err := C.usleep(C.uint(1000000))
